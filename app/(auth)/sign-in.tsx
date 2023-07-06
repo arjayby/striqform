@@ -5,7 +5,6 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 import {
   Button,
-  Header,
   Link,
   Separator,
   Space,
@@ -49,7 +48,7 @@ export default function SignIn() {
       <View style={styles.container}>
         <View style={styles.logo} />
         <Space height={32} />
-        <Header>Welcome Back</Header>
+        <Text variant="header">Welcome Back</Text>
         <Space height={64} />
         <View style={styles.form}>
           <Text>Enter your email and password to sign in your account</Text>

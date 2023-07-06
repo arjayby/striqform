@@ -9,14 +9,7 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-import {
-  Button,
-  Header,
-  Separator,
-  Space,
-  Text,
-  TextInput,
-} from "../../components/ui";
+import { Button, Separator, Space, Text, TextInput } from "../../components/ui";
 import { supabase } from "../../lib/supabase";
 
 export default function SignUp() {
@@ -28,8 +21,15 @@ export default function SignUp() {
       email: email,
       password: password,
     });
+    console.log({ error, data });
 
-    if (data.user) Alert.alert(data.user.id);
+    if (data.user) {
+      if (data.user.identities.length) {
+        Alert.alert("Please confirm your email.");
+      } else {
+        Alert.alert("This email is already signed up. Sign in instead?");
+      }
+    }
     if (error) Alert.alert(error.message);
   };
 
@@ -46,7 +46,7 @@ export default function SignUp() {
       <View style={styles.container}>
         <View style={styles.logo} />
         <Space height={32} />
-        <Header>Create Your Account</Header>
+        <Text variant="header">Create Your Account</Text>
         <Space height={64} />
         <View style={styles.form}>
           <Text>Enter your email and password to create your account</Text>
