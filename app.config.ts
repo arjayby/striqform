@@ -9,6 +9,11 @@ export default {
   web: {
     bundler: "metro",
   },
+  ios: {
+    config: {
+      usesNonExemptEncryption: false,
+    },
+  },
   name: "striqform",
   slug: "striqform",
   extra: {
