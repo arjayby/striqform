@@ -1,30 +1,17 @@
-import { ReactNode } from "react";
-import { Pressable, PressableProps, StyleSheet } from "react-native";
+import { Pressable, PressableProps } from "react-native";
 
 import Text from "./Text";
 
-type LinkProps = {
-  children: ReactNode;
-};
+interface Props extends PressableProps {
+  title: string;
+}
 
-export default function Link(props: LinkProps & PressableProps) {
+export default function Link({ title, ...props }: Props) {
   return (
-    <Pressable
-      style={({ pressed }) => [
-        {
-          opacity: pressed ? 0.5 : 1,
-        },
-      ]}
-      {...props}
-    >
-      <Text style={styles.link}>{props.children}</Text>
+    <Pressable {...props}>
+      <Text variant="muted" className="text-center underline">
+        {title}
+      </Text>
     </Pressable>
   );
 }
-
-const styles = StyleSheet.create({
-  link: {
-    textAlign: "center",
-    textDecorationLine: "underline",
-  },
-});

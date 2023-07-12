@@ -9,9 +9,11 @@ type SeparatorProps = {
 export default function Separator({ centerText }: SeparatorProps) {
   if (centerText) {
     return (
-      <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+      <View className="flex-row items-center gap-3">
         <View style={styles.line} />
-        <Text style={styles.centerText}>{centerText}</Text>
+        <Text variant="muted" className="text-xs">
+          {centerText}
+        </Text>
         <View style={styles.line} />
       </View>
     );
@@ -20,13 +22,11 @@ export default function Separator({ centerText }: SeparatorProps) {
   return <View style={styles.line} />;
 }
 
+// import error when using hairlineWidth from nativewind
 const styles = StyleSheet.create({
   line: {
     flex: 1,
     borderBottomColor: "#E5E7EB",
     borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-  centerText: {
-    fontSize: 12,
   },
 });

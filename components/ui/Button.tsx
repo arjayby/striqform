@@ -1,65 +1,57 @@
-import { Pressable, PressableProps, StyleSheet, Text } from "react-native";
+import { cva, VariantProps } from "class-variance-authority";
+import { Pressable, PressableProps, Text } from "react-native";
 
-type ButtonProps = {
-  primary?: boolean;
-  secondary?: boolean;
-  title: string;
-  pressable?: PressableProps;
-};
+import cn from "../../lib/cn";
+
+const buttonStyles = cva(
+  "p-3 rounded-md border focus:opacity-80 active:opacity-80",
+  {
+    variants: {
+      variant: {
+        primary: "bg-primary border-primary",
+        secondary: "bg-secondary border-gray-200",
+      },
+      fullWidth: {
+        true: "w-full",
+      },
+    },
+    defaultVariants: {
+      variant: "primary",
+    },
+  }
+);
+
+const textStyles = cva("text-center font-semibold", {
+  variants: {
+    variant: {
+      primary: "text-secondary",
+      secondary: "text-primary",
+    },
+  },
+  defaultVariants: {
+    variant: "primary",
+  },
+});
+
+interface ButtonProps
+  extends PressableProps,
+    VariantProps<typeof buttonStyles> {
+  title?: string;
+}
 
 export default function Button({
-  primary = true,
-  secondary,
+  className,
+  variant,
+  fullWidth,
   title,
-  pressable,
+  ...props
 }: ButtonProps) {
   return (
     <Pressable
-      style={({ pressed }) => [
-        {
-          opacity: pressed ? 0.5 : 1,
-        },
-        styles.button,
-        primary && styles.primaryButton,
-        secondary && styles.secondaryButton,
-      ]}
-      {...pressable}
+      className={cn(buttonStyles({ variant, fullWidth, className }))}
+      {...props}
     >
-      <Text
-        style={[
-          styles.text,
-          primary && styles.primaryText,
-          secondary && styles.secondaryText,
-        ]}
-      >
-        {title}
-      </Text>
+      <Text className={cn(textStyles({ variant }))}>{title}</Text>
     </Pressable>
   );
 }
-
-const styles = StyleSheet.create({
-  button: {
-    height: 40,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 6,
-  },
-  text: {
-    fontWeight: "600",
-  },
-  primaryButton: {
-    backgroundColor: "#0F172A",
-  },
-  primaryText: {
-    color: "#F8FAFC",
-  },
-  secondaryButton: {
-    backgroundColor: "transparent",
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-  },
-  secondaryText: {
-    color: "#0F172A",
-  },
-});
