@@ -1,18 +1,14 @@
-import { Link } from "expo-router";
+import { useRouter } from "expo-router";
 import { useState } from "react";
-import {
-  Alert,
-  Dimensions,
-  SafeAreaView,
-  StyleSheet,
-  View,
-} from "react-native";
+import { Alert, Dimensions, StyleSheet, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-import { Button, Separator, Space, Text, TextInput } from "../../components/ui";
+import { Button, Link, Separator, Text, TextInput } from "../../components/ui";
 import { supabase } from "../../lib/supabase";
 
 export default function SignUp() {
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -41,16 +37,25 @@ export default function SignUp() {
     setPassword(text);
   };
 
+  const handleGoToSignUp = () => {
+    setEmail("");
+    setPassword("");
+    router.push("/sign-in");
+  };
+
   return (
     <KeyboardAwareScrollView keyboardShouldPersistTaps="handled">
-      <View style={styles.container}>
-        <View style={styles.logo} />
-        <Space height={32} />
-        <Text variant="header">Create Your Account</Text>
-        <Space height={64} />
-        <View style={styles.form}>
-          <Text>Enter your email and password to create your account</Text>
+      <View className="items-center justify-center flex-1 h-screen">
+        <View className="w-20 h-20 mb-8 rounded-md bg-primary" />
+        <Text variant="header" className="mb-16">
+          Create Your Account
+        </Text>
+        <View className="w-screen pl-5 pr-5 mb-16">
+          <Text variant="muted" className="mb-4">
+            Enter your email and password to create your account
+          </Text>
           <TextInput
+            className="mb-4"
             autoCapitalize="none"
             autoComplete="email"
             keyboardType="email-address"
@@ -60,29 +65,29 @@ export default function SignUp() {
             onChangeText={handleSetEmail}
           />
           <TextInput
-            secureTextEntry
+            isPassword
+            className="mb-4"
             autoCapitalize="none"
             autoCorrect={false}
+            keyboardType="visible-password"
             placeholder="Password"
-            textContentType="newPassword"
+            textContentType="password"
             value={password}
             onChangeText={handleSetPassword}
           />
-          <Button
-            title="Sign Up with Email"
-            pressable={{ onPress: signUpWithEmail }}
-          />
+          <Button className="mb-4" fullWidth title="Sign Up with Email" />
           <Separator centerText="OR CONTINUE WITH" />
-          <Button secondary title="Sign Up with Apple" />
+          <Button
+            className="mt-4"
+            fullWidth
+            variant="secondary"
+            title="Sign Up with Apple"
+          />
         </View>
-        <Space height={64} />
-        <Link href="/sign-in">
-          <Text
-            style={{ textAlign: "center", textDecorationLine: "underline" }}
-          >
-            Already have an account? Sign In
-          </Text>
-        </Link>
+        <Link
+          title="Already have an account? Sign in"
+          onPress={handleGoToSignUp}
+        />
       </View>
     </KeyboardAwareScrollView>
   );

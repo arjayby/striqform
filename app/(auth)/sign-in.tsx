@@ -1,16 +1,9 @@
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Alert, Dimensions, StyleSheet, View } from "react-native";
+import { Alert, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-import {
-  Button,
-  Link,
-  Separator,
-  Space,
-  Text,
-  TextInput,
-} from "../../components/ui";
+import { Button, Link, Separator, Text, TextInput } from "../../components/ui";
 import { supabase } from "../../lib/supabase";
 
 export default function SignIn() {
@@ -45,14 +38,17 @@ export default function SignIn() {
 
   return (
     <KeyboardAwareScrollView keyboardShouldPersistTaps="handled">
-      <View style={styles.container}>
-        <View style={styles.logo} />
-        <Space height={32} />
-        <Text variant="header">Welcome Back</Text>
-        <Space height={64} />
-        <View style={styles.form}>
-          <Text>Enter your email and password to sign in your account</Text>
+      <View className="items-center justify-center flex-1 h-screen">
+        <View className="w-20 h-20 mb-8 rounded-md bg-primary" />
+        <Text variant="header" className="mb-16">
+          Welcome Back
+        </Text>
+        <View className="w-screen pl-5 pr-5 mb-16">
+          <Text variant="muted" className="mb-4">
+            Enter your email and password to sign in your account
+          </Text>
           <TextInput
+            className="mb-4"
             autoCapitalize="none"
             autoComplete="email"
             keyboardType="email-address"
@@ -62,7 +58,8 @@ export default function SignIn() {
             onChangeText={handleSetEmail}
           />
           <TextInput
-            secureTextEntry
+            isPassword
+            className="mb-4"
             autoCapitalize="none"
             autoCorrect={false}
             keyboardType="visible-password"
@@ -71,37 +68,20 @@ export default function SignIn() {
             value={password}
             onChangeText={handleSetPassword}
           />
-          <Button
-            title="Sign In with Email"
-            pressable={{ onPress: signInWithEmail }}
-          />
+          <Button className="mb-4" fullWidth title="Sign In with Email" />
           <Separator centerText="OR CONTINUE WITH" />
-          <Button secondary title="Sign In with Apple" />
+          <Button
+            className="mt-4"
+            fullWidth
+            variant="secondary"
+            title="Sign In with Apple"
+          />
         </View>
-        <Space height={64} />
-        <Link onPress={handleGoToSignUp}>Don't have an account? Sign up</Link>
+        <Link
+          title="Don't have an account? Sign up"
+          onPress={handleGoToSignUp}
+        />
       </View>
     </KeyboardAwareScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    height: Dimensions.get("screen").height,
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  logo: {
-    height: 80,
-    width: 80,
-    backgroundColor: "#0f172a",
-    borderRadius: 6,
-  },
-  form: {
-    gap: 20,
-    width: Dimensions.get("screen").width,
-    paddingLeft: 20,
-    paddingRight: 20,
-  },
-});
