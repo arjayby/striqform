@@ -24,7 +24,7 @@ export default function Auth() {
     if (!session && !inAuthGroup) {
       router.replace("/sign-in");
     } else if (session) {
-      router.replace("/");
+      router.replace("/home");
     }
   }, [session, segments, isInitialized]);
 
