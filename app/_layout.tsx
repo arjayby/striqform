@@ -1,15 +1,13 @@
-import { Slot } from "expo-router";
+import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 
-import Auth from "../components/Auth";
+import { AuthProvider } from "../context/";
 
-export default function Root() {
+export default function Layout() {
   return (
-    // Setup the auth context and render our layout inside of it.
-    <>
-      <Auth />
-      <Slot />
+    <AuthProvider>
+      <Stack screenOptions={{ headerShown: false }} />
       <StatusBar style="dark" />
-    </>
+    </AuthProvider>
   );
 }
