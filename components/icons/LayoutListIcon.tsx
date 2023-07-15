@@ -1,50 +1,16 @@
-import Svg, { Path } from "react-native-svg";
+import { Path, SvgProps } from "react-native-svg";
 
-export default function LayoutListIcon() {
+import SvgIcon from "./SvgIcon";
+
+export default function LayoutListIcon(props: SvgProps) {
   return (
-    <Svg width={24} height={24} viewBox="0 0 24 24" fill="none">
-      <Path
-        d="M10 14H3V21H10V14Z"
-        stroke="black"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-      <Path
-        d="M10 3H3V10H10V3Z"
-        stroke="black"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-      <Path
-        d="M14 4H21"
-        stroke="black"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-      <Path
-        d="M14 9H21"
-        stroke="black"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-      <Path
-        d="M14 15H21"
-        stroke="black"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-      <Path
-        d="M14 20H21"
-        stroke="black"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-    </Svg>
+    <SvgIcon {...props}>
+      <Path d="M10 14H3V21H10V14Z" />
+      <Path d="M10 3H3V10H10V3Z" />
+      <Path d="M14 4H21" />
+      <Path d="M14 9H21" />
+      <Path d="M14 15H21" />
+      <Path d="M14 20H21" />
+    </SvgIcon>
   );
 }

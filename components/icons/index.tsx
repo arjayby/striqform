@@ -1,5 +1,6 @@
+import DumbbellIcon from "./DumbbellIcon";
 import HomeIcon from "./HomeIcon";
 import LayoutListIcon from "./LayoutListIcon";
-import PlusIcon from "./PlusIcon";
+import LineChartIcon from "./LineChartIcon";
 
-export { HomeIcon, PlusIcon, LayoutListIcon };
+export { DumbbellIcon, HomeIcon, LayoutListIcon, LineChartIcon };
