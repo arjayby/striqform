@@ -1,7 +1,7 @@
 import { SafeAreaView, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
-import { Text } from "../../components/ui";
+import { Button, Text } from "../../components/ui";
 import { supabase } from "../../lib/supabase";
 
 const week = [
@@ -26,6 +26,7 @@ export default function Home() {
   };
   return (
     <SafeAreaView>
+      <Button title="logout" onPress={handleSignOut} />
       <View style={{ padding: 16 }}>
         <View
           style={{
